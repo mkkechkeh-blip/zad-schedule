@@ -1,1 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zad Academy – Season 21 Study Schedule (1447 AH)</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --border:rgba(255,255,255,.10);
+      --accent:#b08a3c; /* warm gold */
+      --row:#0f172a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(176,138,60,.25), transparent 55%),
+                  radial-gradient(1000px 600px at 90% 10%, rgba(59,130,246,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      padding:28px 16px;
+    }
+    .wrap{max-width:980px;margin:0 auto}
+    header{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    h1{margin:0;font-size:clamp(20px, 3vw, 28px);line-height:1.2}
+    .sub{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow:hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(17,24,39,.55);
+      color:var(--text);
+      font-size:13px;
+    }
+    .pill b{color:var(--accent)}
+
+    .search{
+      width:min(420px, 100%);
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .search input{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.65);
+      color:var(--text);
+      outline:none;
+    }
+    .search input::placeholder{color:rgba(229,231,235,.55)}
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    thead th{
+      text-align:left;
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:.02em;
+      padding:12px 14px;
+      background: rgba(176,138,60,.16);
+      border-bottom:1px solid var(--border);
+    }
+    tbody td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:14px;
+    }
+    tbody tr:nth-child(odd){background:rgba(15,23,42,.35)}
+    tbody tr:hover{background:rgba(59,130,246,.10)}
+
+    .event{font-weight:650}
+    .date{font-variant-numeric: tabular-nums}
+    .muted{color:var(--muted)}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(17,24,39,.55);
+      font-size:12px;
+      color:var(--muted);
+      margin-left:8px;
+    }
+
+    footer{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    @media (max-width:720px){
+      thead{display:none}
+      table, tbody, tr, td{display:block;width:100%}
+      tbody tr{border-bottom:1px solid var(--border)}
+      tbody td{border-bottom:none;padding:10px 14px}
+      tbody td::before{
+        content: attr(data-label);
+        display:block;
+        color:var(--muted);
+        font-size:12px;
+        margin-bottom:4px;
+      }
+      .badge{margin-left:0;margin-top:6px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Zad Academy – Study Plan Schedule (Season 21)</h1>
+        <p class="sub">Gregorian & Hijri dates • 1447 AH</p>
+      </div>
+      <div class="pill" title="Copied/translated from the Arabic schedule image">
+        <span>Source:</span> <b>Arabic schedule</b>
+      </div>
+    </header>
+
+    <section class="card" aria-label="Schedule">
+      <div class="toolbar">
+        <div class="pill"><b id="count">16</b> items</div>
+        <div class="search">
+          <input id="q" type="search" placeholder="Search events (e.g., weekly, monthly, final)…" autocomplete="off" />
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:46%">Event</th>
+            <th style="width:27%">Gregorian Date</th>
+            <th style="width:27%">Hijri Date</th>
+          </tr>
+        </thead>
+        <tbody id="rows">
+          <tr>
+            <td data-label="Event"><span class="event">Start of Study (Season 21)</span></td>
+            <td data-label="Gregorian Date" class="date">2026-01-18</td>
+            <td data-label="Hijri Date" class="date">1447/07/29 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 1</span></td>
+            <td data-label="Gregorian Date" class="date">2026-01-23</td>
+            <td data-label="Hijri Date" class="date">1447/08/04 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 2</span></td>
+            <td data-label="Gregorian Date" class="date">2026-01-30</td>
+            <td data-label="Hijri Date" class="date">1447/08/11 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 3</span></td>
+            <td data-label="Gregorian Date" class="date">2026-02-06</td>
+            <td data-label="Hijri Date" class="date">1447/08/18 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Monthly Test 1</span><span class="badge">monthly</span></td>
+            <td data-label="Gregorian Date" class="date">2026-02-13</td>
+            <td data-label="Hijri Date" class="date">1447/08/25 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 5</span></td>
+            <td data-label="Gregorian Date" class="date">2026-02-20</td>
+            <td data-label="Hijri Date" class="date">1447/09/03 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 6</span></td>
+            <td data-label="Gregorian Date" class="date">2026-02-27</td>
+            <td data-label="Hijri Date" class="date">1447/09/10 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 7</span></td>
+            <td data-label="Gregorian Date" class="date">2026-03-06</td>
+            <td data-label="Hijri Date" class="date">1447/09/17 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Monthly Test 2</span><span class="badge">monthly</span></td>
+            <td data-label="Gregorian Date" class="date">2026-03-13</td>
+            <td data-label="Hijri Date" class="date">1447/09/24 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 9</span></td>
+            <td data-label="Gregorian Date" class="date">2026-03-20</td>
+            <td data-label="Hijri Date" class="date">1447/10/01 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 10</span></td>
+            <td data-label="Gregorian Date" class="date">2026-03-27</td>
+            <td data-label="Hijri Date" class="date">1447/10/08 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Weekly Test 11</span></td>
+            <td data-label="Gregorian Date" class="date">2026-04-03</td>
+            <td data-label="Hijri Date" class="date">1447/10/15 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Final Exam</span><span class="badge">final</span></td>
+            <td data-label="Gregorian Date" class="date">2026-04-17</td>
+            <td data-label="Hijri Date" class="date">1447/10/29 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">End of Final Exam</span></td>
+            <td data-label="Gregorian Date" class="date">2026-05-01</td>
+            <td data-label="Hijri Date" class="date">1447/11/14 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">Make‑up Exam</span><span class="badge">supplementary</span></td>
+            <td data-label="Gregorian Date" class="date">2026-05-02</td>
+            <td data-label="Hijri Date" class="date">1447/11/15 AH</td>
+          </tr>
+          <tr>
+            <td data-label="Event"><span class="event">End of Make‑up Exam</span></td>
+            <td data-label="Gregorian Date" class="date">2026-05-09</td>
+            <td data-label="Hijri Date" class="date">1447/11/22 AH</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <div><b>Note:</b> The original schedule lists Weekly Tests #1, #2, #3, #5, #6, #7, #9, #10, and #11 (it skips #4 and #8).</div>
+    </footer>
+  </div>
+
+  <script>
+    // Simple client-side search
+    const q = document.getElementById('q');
+    const rows = Array.from(document.querySelectorAll('#rows tr'));
+    const count = document.getElementById('count');
+
+    function applyFilter(){
+      const term = (q.value || '').trim().toLowerCase();
+      let visible = 0;
+      rows.forEach(tr => {
+        const text = tr.innerText.toLowerCase();
+        const show = !term || text.includes(term);
+        tr.style.display = show ? '' : 'none';
+        if(show) visible++;
+      });
+      count.textContent = visible;
+    }
+
+    q.addEventListener('input', applyFilter);
+    applyFilter();
+  </script>
+</body>
+</html>
 
